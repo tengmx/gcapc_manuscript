@@ -1,8 +1,8 @@
+###### call peaks using SPP
+
 library(spp) ## version 1.14
 library(Rsamtools)
-bams <- c('wgEncodeBroadHistoneHuvecCtcfStdRawDataRep1.bam','wgEncodeBroadHistoneHuvecCtcfStdRawDataRep2.bam',
-          'wgEncodeOpenChromChipHuvecCtcfRawDataRep1.bam','wgEncodeOpenChromChipHuvecCtcfRawDataRep2.bam',
-          'wgEncodeUwTfbsHuvecCtcfStdRawDataRep1.bam','wgEncodeUwTfbsHuvecCtcfStdRawDataRep2.bam')
+bams <- list.files(".",pattern='.+bam$')
 fdr <- 0.99
 for(bam in bams){
     ### read file
@@ -21,8 +21,9 @@ for(bam in bams){
     bp <- find.binding.positions(signal.data=chip.data,fdr=fdr,whs=detection.window.halfsize)
     print(paste("detected",sum(unlist(lapply(bp$npl,function(d) length(d$x)))),"peaks"))
     ### output peaks
-    write.narrowpeak.binding(bp,paste0("~/workspace/chipseq/gcapc/spp/",fdr,'/',strsplit(bam,"\\.")[[1]][1],".peak"),
-                             margin = round(detection.window.halfsize/2),npeaks=300000)
+    write.narrowpeak.binding(bp,paste0("spp/",strsplit(bam,"\\.")[[1]][1],".peak"),
+                             margin = round(detection.window.halfsize/2),npeaks=2000000)
+    save(bp,binding.characteristics,file=paste0("spp/",strsplit(bam,"\\.")[[1]][1],".rda"))
 }
 
 

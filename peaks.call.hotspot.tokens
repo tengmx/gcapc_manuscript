@@ -1,0 +1,35 @@
+[script-tokenizer]
+
+###### this is one example how hotspot program was run, by using the following paramters
+
+## specify tokens for hotspot program as below
+_TAGS_ = ~/wgEncodeBroadHistoneHuvecCtcfStdRawDataRep1.bam
+_USE_INPUT_ = F 
+_INPUT_TAGS_ = 
+_GENOME_ = hg19
+_K_ = 36 ## 35 for UTA HUVEC CTCF samples
+_CHROM_FILE_ = ~/hg19.chromInfo.bed
+_MAPPABLE_FILE_ = ~/hg19.K36.mappable_only.bed.starch ## hg19.K35.mappable_only.bed for UTA HUVEC CTCF samples
+_DUPOK_ = F
+_FDRS_ = "0.1"
+_DENS_:
+_OUTDIR_ = ~/hotspot/wgEncodeBroadHistoneHuvecCtcfStdRawDataRep1
+_RANDIR_ = ~/hotspot/wgEncodeBroadHistoneHuvecCtcfStdRawDataRep1/random
+_OMIT_REGIONS_: 
+_CHECK_ = T
+_CHKCHR_ = chrX
+_HOTSPOT_ = ~/hotspot/hotspot-distr/hotspot-deploy/bin/hotspot
+_CLEAN_ = T
+_PKFIND_BIN_ = ~/hotspot/hotspot-distr/hotspot-deploy/bin/wavePeaks
+_PKFIND_SMTH_LVL_ = 3
+_SEED_=101
+_THRESH_ = 2
+_WIN_MIN_ = 200
+_WIN_MAX_ = 300
+_WIN_INCR_ = 50
+_BACKGRD_WIN_ = 50000
+_MERGE_DIST_ = 150
+_MINSIZE_ = 10
+
+
+## then run "./runhotspot" to use above tokens for peak calling
